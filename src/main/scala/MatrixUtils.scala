@@ -7,8 +7,7 @@ object MatrixUtils {
   }
 
   def is_inside[T](m: Array[Array[T]], i: Int, j: Int): Boolean = {
-    val width = m(0).length
-    val height = m.length
+    val (width, height) = get_dimension(m)
     (0 <= i && i < width) && (0 <= j && j < height)
   }
 

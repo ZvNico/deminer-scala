@@ -2,7 +2,7 @@ import MatrixUtils.{get_neighbors, init_game}
 
 class MineSweeper(width: Int, height: Int, nMines: Int) {
   val grid: Array[Array[Case]] = init_game(width, height, nMines)
-  var nNonRevealed = width * height - nMines
+  var nNonRevealed: Int = width * height - nMines
 
 
   def interact(i: Int, j: Int): Boolean = {
@@ -19,12 +19,12 @@ class MineSweeper(width: Int, height: Int, nMines: Int) {
 
     case_.asInstanceOf[Empty].isRevealed = true
     nNonRevealed -= 1
-    if (case_.asInstanceOf[Empty].nAdjacentMines == 0)
+    if (case_.asInstanceOf[Empty].n == 0)
       get_neighbors(grid, i, j).foreach(neighbor => reveal(neighbor._1, neighbor._2))
   }
 
   def is_not_revealed(i: Int, j: Int): Boolean = {
-    var case_ = grid(j)(i)
+    val case_ = grid(j)(i)
     if (case_.isInstanceOf[Empty]) return !case_.asInstanceOf[Empty].isRevealed
     true
   }
